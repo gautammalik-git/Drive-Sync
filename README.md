@@ -74,7 +74,7 @@ python sync.py --debug
 ### 📖 View Changes
 ```bash
 # View changelog for specific file
-python run_sync.py --view-changes script.py
+python sync.py --view-changes script.py
 ```
 
 ## How It Works
@@ -110,7 +110,7 @@ project/
 ├── client_secrets.json   # Google OAuth credentials
 ├── token.pickle         # Stored auth token
 ├── drive_sync.py        # Main sync code
-└── run_sync.py          # Command line interface
+└── sync.py          # Command line interface
 ```
 
 ## Pro Tips! 🚀
