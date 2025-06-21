@@ -48,6 +48,17 @@ def main():
 
     global sync  # Make sync accessible to signal handler
     sync = DriveSync(config)
+    
+    # Handle view-changes and exit if requested
+    if args.view_changes:
+        changes = sync.view_changelog(args.view_changes)
+        if not changes:
+            print(f"No changes recorded for {args.view_changes}")
+        else:
+            for change in changes:
+                print(f"\n=== Changes at {change['timestamp']} ===")
+                print(change['changes'])
+        return  # <-- Prevents sync from starting
 
     try:
         sync.start_sync(interval=config.sync_interval)
