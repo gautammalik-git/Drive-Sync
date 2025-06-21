@@ -52,12 +52,18 @@ def main():
     # Handle view-changes and exit if requested
     if args.view_changes:
         changes = sync.view_changelog(args.view_changes)
+        changelog_filename = f"changelog_{args.view_changes.split('.')[0]}.txt"
         if not changes:
             print(f"No changes recorded for {args.view_changes}")
+            with open(changelog_filename, 'w') as f:
+                f.write(f"No changes recorded for {args.view_changes}\n")
         else:
-            for change in changes:
-                print(f"\n=== Changes at {change['timestamp']} ===")
-                print(change['changes'])
+            with open(changelog_filename, 'w') as f:
+                for change in changes:
+                    f.write(f"\n=== Changes at {change['timestamp']} ===\n")
+                    f.write(change['changes'])
+                    f.write("\n")
+            print(f"Changelog saved to {changelog_filename}")
         return  # <-- Prevents sync from starting
 
     try:
